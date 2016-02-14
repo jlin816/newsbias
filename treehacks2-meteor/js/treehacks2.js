@@ -32,11 +32,9 @@ if (Meteor.isClient) {
               }
             ];
 
-            var i = 2;
             var arr = $.parseJSON(results.content);
             $(arr).each(function() {
-              data[0].data.push({x: this.bucket, y: 2, r: 2})
-              i = i + 1;
+              data[0].data.push({x: this.bucket, y: 0, r: 2})
             });
 
             var ctx = document.getElementById("myBubbleChart").getContext("2d");
