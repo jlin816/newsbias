@@ -2,7 +2,7 @@ import requests
 import json
 import os
 from django.http import HttpResponse
-from library.models import Query
+from newsbiasapp.models import Query
 
 def getData(request):
     myquery = request.GET['q']
