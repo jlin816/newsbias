@@ -25,7 +25,7 @@ def getData(request):
                          'title': title,
                          'sentiment': sentiment})
         
-    jarticles = json.dumps(articles, ensure_ascii=False)
+    jarticles = json.dumps(articles, ensure_ascii=True)
     print articles
     print
     print jarticles
