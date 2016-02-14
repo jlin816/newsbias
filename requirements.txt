@@ -20,6 +20,6 @@ virtualenv==13.1.2
 virtualenv-clone==0.2.6
 virtualenvwrapper==4.7.1
 wheel==0.26.0
-numpy==1.7.0
-scipy==0.11.0
-scikit-learn==0.13.1
+numpy==1.9.1
+scipy==0.15.1
+scikit-learn==0.15.2
