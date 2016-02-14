@@ -1,5 +1,8 @@
 # Django settings for newsbias project.
 import os, sys
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -60,7 +63,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(sys.path[0], 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
