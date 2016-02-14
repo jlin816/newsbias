@@ -42,16 +42,18 @@ def getData(request):
     
 
 from sklearn.cluster import KMeans
-def kmcluster(articles, n_clusters=3):
-    X = [art['sentiment'] for art in articles]
-    km = KMeans(n_clusters)
-    y = km.fit(X)
+def kmcluster(articles, n_clusters=2):
+    X = [[float(art['sentiment'])] for art in articles]
+    km = KMeans(n_clusters) 
+    print X
+    km.fit(X)
+    y = km.predict(X).tolist()
     for i in xrange(len(articles)):
         articles[i]['kmeans'] = y[i]
 
 def bucket(articles, num_buckets = 10):
-    for art in xrange(articles):
-        art['bucket'] = (art['sentiment'] + 1) * 10 + 0.2
+    for art in articles:
+        art['bucket'] = (float(art['sentiment']) + 1) * 10 + 0.2
 
     
     
