@@ -15,8 +15,8 @@ def getData(request):
 
 
     # Check if query results are already cached in the db
-    if Query.objects.filter(Query.query=myquery).exists():
-        results = Query.objects.filter(Query.query=myquery).json
+    if Query.objects.filter(query=myquery).exists():
+        results = Query.objects.filter(query=myquery).json
         print results
         return HttpResponse(results)
 
