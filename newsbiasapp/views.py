@@ -1,14 +1,21 @@
 import requests
 import json
 import os
-from textblob import TextBlob
 from django.http import HttpResponse
 
 def getData(request):
-    query = request.GET['q']
-    print query
+    myquery = request.GET['q']
+    print myquery
 
-    query_parts = query.split()
+
+    # Check if query results are already cached in the db
+    if Query.objects.filter(query=myquery).exists():
+        results = Query.objects.filter(query=myquery).json
+        print results
+        return HttpResponse(results)
+
+    # Split into parts to allow AlchemyAPI to handle multiword queries
+    query_parts = myquery.split()
     ALCHEMY_SECRET_KEY = os.environ['ALCHEMY_SECRET_KEY']
     url= "https://access.alchemyapi.com/calls/data/GetNews?apikey=" + ALCHEMY_SECRET_KEY +"&return=enriched.url.title,enriched.url.url,enriched.url.docSentiment&start=1454803200&end=1455490800&count=25&outputMode=json"
 
