@@ -1,8 +1,8 @@
 if (Meteor.isServer) {
     Meteor.methods({
-        checkSentiment: function () {
+        checkSentiment: function (searchTerm) {
             this.unblock();
-            return Meteor.http.call("GET", "http://search.twitter.com/search.json?q=happytweets");
+            return Meteor.http.call("GET", "https://agile-escarpment-65178.herokuapp.com/newsbiasapp/getData?q=" + searchTerm);
         }
     });
 }
@@ -11,10 +11,12 @@ if (Meteor.isClient) {
   // This code only runs on the client
 
   Template.search.events({
-        'click #search-sentiment' : function () {
+        'submit form' : function (event) {
           event.preventDefault();
-          Meteor.call("checkSentiment", function(error, results) {
-          console.log("Hello"); //results.data should be a JSON object
+          var searchTerm = event.target.search.value;
+          console.log(searchTerm);
+          Meteor.call("checkSentiment", searchTerm, function(error, results) {
+          //console.log(results.content); //results.data should be a JSON object
           });
         }
     });
