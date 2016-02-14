@@ -1,9 +1,12 @@
 import requests
 import json
 import os
+from textblob import TextBlob
+from django.http import HttpResponse
 
 def getData(request):
     query = request.GET['q']
+    print query
 
     query_parts = query.split()
     ALCHEMY_SECRET_KEY = os.environ['ALCHEMY_SECRET_KEY']
@@ -26,10 +29,7 @@ def getData(request):
     
 
 
-    jarticles = json.dumps(articles, ensure_ascii=False)
-    print articles
-    print
-    print jarticles
+    jarticles = json.dumps(articles, ensure_ascii=True)
     return HttpResponse(jarticles)
     
 
