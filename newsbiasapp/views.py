@@ -53,7 +53,7 @@ def kmcluster(articles, n_clusters=2):
 
 def bucket(articles, num_buckets = 10):
     for art in articles:
-        art['bucket'] = (float(art['sentiment']) + 1) * 10 + 0.2
+        art['bucket'] = int((float(art['sentiment']) + 1) * 10 + 0.2)
 
     
     
