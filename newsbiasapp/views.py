@@ -46,6 +46,5 @@ def bucket(articles, num_buckets = 10):
     for art in xrange(articles):
         art['bucket'] = (art['sentiment'] + 1) * 10
 
-def keywords(articles, cluster_ids):
     
     
