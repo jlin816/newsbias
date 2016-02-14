@@ -20,7 +20,6 @@ if (Meteor.isClient) {
           var searchTerm = event.target.search.value;
           console.log(searchTerm);
           Meteor.call("checkSentiment", searchTerm, function(error, results) {
-          //console.log(results.content); //results.data should be a JSON object
 
             Chart.defaults.global.responsive = true;
             Chart.defaults.global.animation = false;
@@ -33,12 +32,9 @@ if (Meteor.isClient) {
               }
             ];
 
-            var i = 2;
             var arr = $.parseJSON(results.content);
             $(arr).each(function() {
-              data[0].data.push({x: this.sentiment, y: 2, r: 2})
-              //console.log(data[0].data);
-              i = i + 1;
+              data[0].data.push({x: this.bucket, y: 0, r: 2})
             });
 
             var ctx = document.getElementById("myBubbleChart").getContext("2d");
