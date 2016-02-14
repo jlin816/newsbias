@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+from django.http import HttpResponse
 
 def getData(request):
     query = request.GET['q']
