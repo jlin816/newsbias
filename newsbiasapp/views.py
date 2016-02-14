@@ -2,7 +2,7 @@ import requests
 import json
 import os
 from django.http import HttpResponse
-#from newsbiasapp.models import Query
+from newsbiasapp.models import Query
 from itertools import izip
 from collections import defaultdict
 import operator
