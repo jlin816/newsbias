@@ -30,4 +30,3 @@ def getData(request):
     print jarticles
     return HttpResponse(jarticles)
     
-getData(None)
