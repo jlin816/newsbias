@@ -26,10 +26,25 @@ def getData(request):
         articles.append({'link': link,
                          'title': title,
                          'sentiment': sentiment})
-        
+    
+
+
     jarticles = json.dumps(articles, ensure_ascii=True)
-    print articles
-    print
-    print jarticles
     return HttpResponse(jarticles)
+    
+
+from sklearn.cluster import KMeans
+def kmcluster(articles, n_clusters=3):
+    X = [art['sentiment'] for art in articles]
+    km = KMeans(n_clusters)
+    y = km.fit(X)
+    for i in xrange(len(articles)):
+        articles[i]['kmeans'] = y[i]
+    return 
+
+def bucket(articles, num_buckets = 10):
+    for art in xrange(articles):
+        art['bucket'] = (art['sentiment'] + 1) * 10
+
+    
     
