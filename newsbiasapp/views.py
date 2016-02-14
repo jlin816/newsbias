@@ -2,7 +2,7 @@ from django.http import HttpResponse
 import requests
 
 def getData(request):
-    f = open("newsbiasapp/api_key.txt", "r")
+    f = open("api_key.txt", "r")
     key = f.read().strip()
     # query = request.GET[''] #edit this
     query = "bernie sanders"
