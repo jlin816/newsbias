@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from itertools import izip
 from collections import defaultdict
 import operator
+from django.db import models
 
 
 def getData(request):
@@ -14,20 +15,20 @@ def getData(request):
 
 
     # Check if query results are already cached in the db
-    if Query.objects.filter(query=myquery).exists():
-        results = Query.objects.filter(query=myquery).json
+    if Query.objects.filter(Query.query=myquery).exists():
+        results = Query.objects.filter(Query.query=myquery).json
         print results
         return HttpResponse(results)
 
     # Split into parts to allow AlchemyAPI to handle multiword queries
-    query_parts = myquery.split()
+    query_parts = myquery.split(
     ALCHEMY_SECRET_KEY = os.environ['ALCHEMY_SECRET_KEY']
     url= "https://access.alchemyapi.com/calls/data/GetNews?apikey=" + ALCHEMY_SECRET_KEY +"&return=enriched.url.title,enriched.url.url,enriched.url.docSentiment,enriched.url.keywords&start=now-50&end=now&count=25&outputMode=json"
 
     for part in query_parts:
-        url += "&q.enriched.url.enrichedTitle.keywords.keyword.text=" + part
+        query_url += "&q.enriched.url.enrichedTitle.keywords.keyword.text=" + part
 
-    response = requests.get(url)
+    response = requests.get(query_url)
     data = json.loads(response.text)
     print response.text
     articles = []
