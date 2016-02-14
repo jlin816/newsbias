@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 import requests
+import os
 
 def getData(request):
     #f = open("./api_key.txt", "r")
